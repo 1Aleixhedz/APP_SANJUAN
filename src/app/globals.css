@@ -1,26 +1,91 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --fondo: #f6f5fb;
+  --panel: #ffffff;
+  --panel-alto: #ececf6;
+  --lavanda: #e8e8f4;
+  --borde: #e2e2ee;
+  --texto: #0c0c10;
+  --suave: #6a6a78;
+  --negro: #0c0c10;
+  --rosa: #d4849a;
+  --carmesi: #e11d48;
+  --jade: #059669;
+  --oro: #c9a227;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-fondo: var(--fondo);
+  --color-obsidiana: var(--fondo);
+  --color-panel: var(--panel);
+  --color-panel-alto: var(--panel-alto);
+  --color-lavanda: var(--lavanda);
+  --color-borde: var(--borde);
+  --color-texto: var(--texto);
+  --color-suave: var(--suave);
+  --color-negro: var(--negro);
+  --color-rosa: var(--rosa);
+  --color-carmesi: var(--carmesi);
+  --color-carmesi-hondo: var(--carmesi);
+  --color-neon: var(--suave);
+  --color-jade: var(--jade);
+  --color-oro: var(--oro);
+  --color-ambar: var(--oro);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  color-scheme: light;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+input,
+select,
+textarea {
+  font-size: 16px;
+}
+
+.etiqueta {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tarjeta {
+  background: var(--panel);
+  border: 1px solid var(--borde);
+  border-radius: 22px;
+}
+
+.tarjeta-suave {
+  background: var(--lavanda);
+  border-radius: 22px;
+}
+
+.boton-negro {
+  background: var(--negro);
+  color: #fff;
+}
+
+.boton-carmesi {
+  background: var(--negro);
+  color: #fff;
+}
+
+.sin-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.sin-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

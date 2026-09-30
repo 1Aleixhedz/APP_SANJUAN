@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# IronPulse Central · app de máquinas y récords
 
-## Getting Started
+Prototipo de web app (PWA) para el gimnasio. Cada bahía lleva un QR pegado; al
+escanearlo se abre la ficha de esa máquina con la técnica, el mapa de
+reclutamiento muscular y los récords, y desde ahí se registran las series que
+alimentan los rankings.
 
-First, run the development server:
+## Arrancar
+
+Para producción (Supabase + Vercel): sigue **[`SETUP.md`](SETUP.md)** paso a paso.
 
 ```bash
+cp .env.local.example .env.local   # rellena URL y anon key de Supabase
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Se abre en http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Para verlo en el móvil, con el móvil en la misma wifi que el ordenador:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run dev:movil
+```
 
-## Learn More
+Luego busca la IP del ordenador (`ipconfig` en Windows) y entra desde el móvil
+a `http://esa-ip:3000`.
 
-To learn more about Next.js, take a look at the following resources:
+## Pantallas
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+La barra inferior tiene cuatro pestañas, igual que en los diseños.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Ruta | Pestaña | Qué es |
+| --- | --- | --- |
+| `/` | Máquina / QR | Escaneo, sesión en curso y listado de bahías |
+| `/m/<maquina>` | Máquina / QR | **La pantalla del QR**: visor biomecánico, reclutamiento, claves de técnica y récords de la bahía |
+| `/registro` | Registro | Benchmark de sala, cronómetro de descanso, RPE, macro placas y series de la sesión |
+| `/ranking` | Rankings | Podio por máquina o por kilos totales, tu posición y Salón de la Fama |
+| `/perfil` | Mi Perfil | Nivel y XP, récords personales, vitrina de trofeos y actividad reciente |
+| `/login` | — | Acceso por magic link (Supabase Auth) |
+| `/admin/qr` | — | Genera los QR de todas las bahías (solo admin) |
 
-## Deploy on Vercel
+## Qué es de verdad y qué está simulado
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Funciona de verdad (con Supabase configurado):
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Auth por magic link, perfiles y series en la nube (multi-dispositivo).
+- Récords por máquina (histórico, semana, mes) y rankings de carga y tonelaje.
+- Nivel y XP, trofeos, rachas, récords batidos de la temporada, bestia de la
+  semana y récord más longevo del gimnasio.
+- Registro de series con calentamiento/efectiva, RPE, notas y cronómetro.
+- Generación e impresión de los QR.
+- Seed de demo solo para admins (botón en Perfil o `supabase/seed_demo.sql`).
+
+Pendiente / simulado:
+
+- La telemetría del visor (ángulo, pausa, fase) son datos técnicos fijos de cada
+  máquina, no sensores en vivo.
+- Vídeos de técnica: opcional en `public/videos/` (ver LEEME ahí).
+- Catálogo de máquinas sigue en código (`src/lib/machines.ts`), no en la DB.
+
+## Cambiar máquinas, músculos o textos
+
+- Bahías, sectores, técnica, reclutamiento y topes de peso: `src/lib/machines.ts`
+- Esquema DB, seed demo y RLS: `supabase/schema.sql`
+- Récords, rankings, niveles y trofeos: `src/lib/rankings.ts`
+- Músculos y en qué vista se dibuja cada uno: `src/lib/muscles.ts`
+- Dibujo del cuerpo y de cada músculo: `src/components/MuscleMap.tsx`
+- Colores y tipografía del tema: `src/app/globals.css`
+
+## Utilidad de desarrollo
+
+`npm run capturas -- /ranking /perfil` guarda capturas de pantalla en
+`capturas/` usando el Edge instalado en Windows. Útil para revisar el diseño
+sin tener que abrir el móvil.

@@ -1,0 +1,27 @@
+Vídeos de la técnica de cada máquina.
+
+Cómo añadirlos:
+
+1. Graba entre 10 y 15 segundos de la máquina, en horizontal, sin sonido.
+2. Guarda el archivo en esta carpeta con el nombre exacto de la máquina.
+   Por ejemplo: remo-sentado.mp4, prensa-de-piernas.mp4
+3. Si quieres una imagen de portada, añade el mismo nombre en .jpg
+   Por ejemplo: remo-sentado.jpg
+
+Los nombres tienen que coincidir con el identificador de la máquina, que es el
+que aparece en la dirección de la app: /m/remo-sentado
+
+Nombres actuales:
+  remo-sentado
+  jalon-al-pecho
+  press-de-pecho
+  press-militar
+  prensa-de-piernas
+  extension-de-cuadriceps
+  curl-femoral
+  abductores
+  curl-de-biceps
+  crunch-abdominal
+
+Mientras no haya vídeo, la app muestra un hueco con estas instrucciones y el
+mapa de músculos sigue funcionando.
